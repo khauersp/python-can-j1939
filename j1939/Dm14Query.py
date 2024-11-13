@@ -147,12 +147,14 @@ class Dm14Query:
                     self._send_operation_complete()
                     self.state = QueryState.IDLE
                     self.data_queue.put(self.mem_data)
+                    print(f"put mem data in data {self.mem_data}")
                 else:
                     assert self.state is QueryState.WAIT_FOR_SEED
                     if self._seed_from_key is not None:
                         self._send_dm14(self._seed_from_key(seed))
                     else:
                         self.data_queue.put(None)
+                        print(f"put None in data")
                         self.exception_queue.put(
                             RuntimeError(
                                 "Key requested from host but no seed-key algorithm has been provided"
@@ -175,6 +177,7 @@ class Dm14Query:
         length = min(data[0], len(data) - 1)
         # assert object_count == self.object_count
         self.mem_data = data[1 : length + 1]
+        print(f"mem_data {self.mem_data}")
         self._ca.unsubscribe(self._parse_dm16)
         self._ca.subscribe(self._parse_dm15)
         self.state = QueryState.WAIT_FOR_OPER_COMPLETE
