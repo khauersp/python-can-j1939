@@ -249,6 +249,7 @@ class Dm14Query:
             raw_bytes = self.data_queue.get(block=True, timeout=max_timeout)
             print(f"raw_bytes: {raw_bytes}")
         except queue.Empty:
+            print(f"queue empty, state {self.state}")
             if self.state is QueryState.WAIT_FOR_SEED:
                 raise RuntimeError("No response from server")
             pass
