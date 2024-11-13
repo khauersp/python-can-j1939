@@ -123,6 +123,7 @@ class Dm14Query:
             error = int.from_bytes(data[2:5], byteorder="little", signed=False)
             edcp = data[5]
             self.data_queue.put(None)
+            print(f"put None in data {error} {edcp} status {status}")
             if edcp == 0x06 or edcp == 0x07:
                 if error in j1939.ErrorInfo:
                     self.exception_queue.put(
