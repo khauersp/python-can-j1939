@@ -245,6 +245,7 @@ class Dm14Query:
         # wait for operation completed DM15 message
         raw_bytes = None
         try:
+            print("waiting for data")
             raw_bytes = self.data_queue.get(block=True, timeout=max_timeout)
             print(f"raw_bytes: {raw_bytes}")
         except queue.Empty:
