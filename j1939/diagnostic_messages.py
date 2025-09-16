@@ -172,8 +172,11 @@ class Dm1:
         cookie = {'cb': callback,}
         self._ca.add_timer(delta_time=cycletime, callback=self._send, cookie=cookie)
 
-    def stop_send(self, callback):
-        self._ca.remove_timer(callback)
+    def stop_send(self):
+        """
+        Stop cyclic sending of Dm1 message
+        """
+        self._ca.remove_timer(callback=self._send)
 
     @property
     def dtc_dic_list(self):
