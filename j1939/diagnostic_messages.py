@@ -173,8 +173,7 @@ class Dm1:
         self._ca.add_timer(delta_time=cycletime, callback=self._send, cookie=cookie)
 
     def stop_send(self):
-        """
-        Stop cyclic sending of Dm1 message
+        """Stop cyclic sending of Dm1 message
         """
         self._ca.remove_timer(callback=self._send)
 
