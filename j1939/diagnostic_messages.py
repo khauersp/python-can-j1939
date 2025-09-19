@@ -285,6 +285,11 @@ class Dm1:
                      | ((self._data[i*4+4] & 0xff) << 16)
                      | ((self._data[i*4+5] & 0xff) << 24))
 
+            if dtc_int == 0x0:
+                # according to J1939 standard after 2004, if all these bytes are 0x00 then then no data is available for the dtc
+                # so we should not add this to the dtc list since it is not a valid dtc
+                continue
+        
             dtc = DTC(dtc=dtc_int)
             self._dtc_dic_list.append( {'spn': dtc.spn, 'fmi': dtc.fmi, 'oc': dtc.oc } )
 
