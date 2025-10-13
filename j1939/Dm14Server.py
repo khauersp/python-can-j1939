@@ -321,7 +321,10 @@ class DM14Server:
         :param int key: key
         """
         if self._verify_key is not None:
-            return self._verify_key(seed, key)
+            # TODO: add ability to dynamically pass arguments to verification function if needed,
+            # if this is breaking can just add *args to function defintion used to set the verification function
+            # this will allow for the reception of additional arguments if needed
+            return self._verify_key(seed, key, self.bytes_to_int(self.address), self.sa)
         return True if self._key_from_seed(seed) == key else False
 
     def reset_query(self) -> None:
