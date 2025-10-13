@@ -327,7 +327,7 @@ class DM14Server:
             return self._verify_key(
                 seed=seed, key=key, address=self.bytes_to_int(self.address), sa=self.sa
             )
-        return True if self._key_from_seed(seed) == key else False
+        return self._key_from_seed(seed) == key
 
     def reset_query(self) -> None:
         """
