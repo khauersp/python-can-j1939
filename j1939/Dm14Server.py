@@ -29,6 +29,7 @@ class DM14Server:
         self._key_from_seed = None
         self.data_queue = queue.Queue()
         self._seed_generator = self.generate_seed
+        self._verify_key = None
         self.address = None
         self.length = 8
         self.proceed = False
@@ -306,12 +307,21 @@ class DM14Server:
         """
         self._seed_generator = algorithm
 
+    def set_verify_key(self, algorithm: callable) -> None:
+        """
+        Set key verification algorithm to be used for key verification
+        :param callable algorithm: key verification algorithm
+        """
+        self._verify_key = algorithm
+
     def verify_key(self, seed: int, key: int) -> bool:
         """
         Checks to see if key is valid
         :param int seed: seed
         :param int key: key
         """
+        if self._verify_key is not None:
+            return self._verify_key(seed, key)
         return True if self._key_from_seed(seed) == key else False
 
     def reset_query(self) -> None:
