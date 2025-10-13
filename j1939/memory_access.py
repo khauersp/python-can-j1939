@@ -236,6 +236,13 @@ class MemoryAccess:
         self.query.set_seed_key_algorithm(algorithm)
         self.server.set_seed_key_algorithm(algorithm)
 
+    def set_verify_key(self, verify_key: callable) -> None:
+        """
+        set verify key function to be used for verifying the key
+        :param callable verify_key: verify key function
+        """
+        self.server.set_verify_key(verify_key)
+
     def set_notify(self, notify: callable) -> None:
         """
         set notify function to be used for notifying the user of memory accesses

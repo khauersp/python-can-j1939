@@ -163,6 +163,10 @@ def generate_seed():
     return 0xA55A
 
 
+def verify_key(key, seed, **_):
+    return key == key_from_seed(seed)
+
+
 def get_error():
     return [(e.value) for e in j1939.J1939Error]
 
@@ -428,6 +432,7 @@ def test_dm14_request_write(feeder, expected_messages):
 
     if expected_messages == request_write_with_seed:
         dm14.set_seed_key_algorithm(key_from_seed)
+        dm14.set_verify_key(verify_key)
     values = 0x11223344
     while flag is False:
         pass
