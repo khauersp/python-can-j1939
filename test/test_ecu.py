@@ -187,3 +187,16 @@ def test_add_notfier(feeder):
     assert feeder.ecu._notifier == notifier
     feeder.ecu.remove_notifier()
     assert feeder.ecu._notifier == None
+
+def test_add_bus_filters(feeder):
+    """
+    Test adding bus filters to the ECU
+    """
+    bus = can.interface.Bus(interface="virtual", channel=1)
+    feeder.ecu.add_bus(bus)
+    filters = [
+        {'can_id': 0x123, 'can_mask': 0x7FF, 'extended': True},
+        {'can_id': 0x456, 'can_mask': 0x7FF}
+    ]
+    feeder.ecu.add_bus_filters(filters)
+    assert feeder.ecu._bus.filters == filters
