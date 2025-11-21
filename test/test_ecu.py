@@ -200,3 +200,4 @@ def test_add_bus_filters(feeder):
     ]
     feeder.ecu.add_bus_filters(filters)
     assert feeder.ecu._bus.filters == filters
+    
