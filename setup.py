@@ -26,13 +26,12 @@ setup(
         "Topic :: Scientific/Engineering"
     ],
     install_requires=[
-        "python-can >= 3.3.4",
-        "numpy >= 1.17.0",
-        "pytest >= 6.2.5",
+        "python-can >= 4.2.0",
     ],
+    extras_require={
+        "test": [
+            "pytest >= 6.2.5",
+        ],
+    },
     include_package_data=True,
-
-    # Tests can be run using `python setup.py test`
-    test_suite="nose.collector",
-    tests_require=["nose"]
 )
